@@ -10,7 +10,7 @@ class Battleship {
     this.ships = {
       c: new Ship("carrier", 5, "c"),
       b: new Ship("battleship", 4, "b"),
-      c: new Ship("cruiser", 3, "k"),
+      k: new Ship("cruiser", 3, "k"),
       s: new Ship("submarine", 3, "s"),
       d: new Ship("destroyer", 2, "d")
     }
@@ -19,6 +19,10 @@ class Battleship {
   get board() {
     return this.player.board;
   }
+
+  // get ships() {
+  //   return this.ships;
+  // }
 }
 
 module.exports = Battleship;

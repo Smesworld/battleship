@@ -5,15 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> 
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
   <title>Battleship</title>
 </head>
 <body>
   <main style="margin: 1em;">
-      <h3>Game Board</h3>
+    <h3>Game Board</h3>
+    <div class="order-1 order-md-0 w-50">
       <table class="table">
         <thead>
           <tr>
@@ -35,34 +33,97 @@
           <% for (const col in b) { %>
             <tr>
               <td><%= row++ %></td>
-              <% for (const row in b[col]) { %>
-                <td>
-                  <form method="POST" action="/game">
-                    <input type="hidden" name="col" value=<%= col %>>
-                    <input type="hidden" name="row" value=<%= row %>>
-                    <button type="submit"><%= b[col][row] %></button>
-                  </form>
-                </td>
+                <% for (const row in b[col]) { %>
+                  <td>
+                    <form method="POST" action="/game">
+                      <input type="hidden" name="col" value=<%= col %>>
+                      <input type="hidden" name="row" value=<%= row %>>
+                      <button type="submit"><%= b[col][row] %></button>
+                    </form>
+                  </td>
                 <% } %>
               </tr>
+            <% } %>
+          </tbody>
+        </table>
+    </div>
+    <div>
+      <form method="POST" action="/ship">
+        <table class="table">
+          <thead>
+            <tr>
+              <% for (const ship in s) { %>
+                <td><label class="radio-inline">
+                  <% if (ship.placed) { %>
+                    <%= s[ship].name %> ✅
+                  <% } else { %>
+                    <input type="radio" name="ship" value=<%= s[ship].name %>> <%= s[ship].name %> ❌
+                  <% } %>
+                </label></td>
               <% } %>
-            </tbody>
-          </table>
-          
-          <div id="container">
-            <div id="box-1" class="box">Box 1</div>
-            <div id="box-2" class="box">Box 2</div>
-          </div>
-        </main>
+            </tr>
+          </thead>
+        </table>
+        <div>
+        Start
+        <select class="select-inline" name="placeColStart">
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="E">E</option>
+            <option value="F">F</option>
+            <option value="G">G</option>
+            <option value="H">H</option>
+            <option value="I">I</option>
+            <option value="J">J</option>
+          </select>
+        <select class="select-inline" name="placeRowStart">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+        </div>
+        <div>
+        End 
+        <select class="select-inline" name="placeColEnd">
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="E">E</option>
+            <option value="F">F</option>
+            <option value="G">G</option>
+            <option value="H">H</option>
+            <option value="I">I</option>
+            <option value="J">J</option>
+          </select>
+        <select class="select-inline" name="placeRowEnd">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+        </div>
+        <button type="submit" class="button-inline">Submit</button>
+      </form>
+    </div>
+  </main>
   <!-- Bootstrap JS -->
-  <script>
-    $('#box-1').draggable({
-      grid: [ 20,20 ] 
-    });
-    $('#box-2').draggable({
-      grid: [ 20,20 ] 
-    });
-  </script>
+
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

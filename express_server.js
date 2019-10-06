@@ -23,12 +23,20 @@ const game = new Battleship();
 
 app.get("/game", (req, res) => {
   const b = game.board;
-  res.render("game_index", {b});
+  const s = game.ships;
+  res.render("game_index", {b, s});
 });
 
 app.post("/game", (req, res) => {
   // player.shot([req.body.col, req.body.row]);
 
+  res.redirect("/game");
+});
+
+app.post("/ship", (req, res) => {
+  console.log("ship", req.body.ship);
+  console.log("placeColStart", req.body.placeColStart);
+  console.log("placeRowStart", req.body.placeRowStart);
   res.redirect("/game");
 });
 

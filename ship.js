@@ -3,6 +3,7 @@ class Ship {
     this.name = name;
     this.length = length;
     this.indicator = indicator;
+    this.placed = false;
   }
 
 
