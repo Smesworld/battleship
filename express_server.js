@@ -24,7 +24,9 @@ const game = new Battleship();
 app.get("/game", (req, res) => {
   const b = game.board;
   const s = game.ships;
-  res.render("game_index", {b, s});
+  const p = game.allPlaced;
+
+  res.render("game_index", {b, s, p});
 });
 
 app.post("/game", (req, res) => {
@@ -34,9 +36,14 @@ app.post("/game", (req, res) => {
 });
 
 app.post("/ship", (req, res) => {
-  console.log("ship", req.body.ship);
-  console.log("placeColStart", req.body.placeColStart);
-  console.log("placeRowStart", req.body.placeRowStart);
+  const ship = req.body.ship;
+  const rowStart = Number(req.body.placeRowStart);
+  const colStart = Number(req.body.placeColStart);
+  const rowEnd = Number(req.body.placeRowEnd);
+  const colEnd = Number(req.body.placeColEnd);
+
+  game.placeShip(ship, rowStart, colStart, rowEnd, colEnd);
+
   res.redirect("/game");
 });
 

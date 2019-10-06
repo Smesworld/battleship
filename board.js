@@ -14,9 +14,14 @@ class Board {
     }
   }
 
-  place(loc) {
-    this.board[loc[0]][loc[1]] = "X";
+  value(row, col) {
+    return this.board[row][col];
   }
+
+  place(row, col, icon) {
+    this.board[row][col] = icon;
+  }
+
 
   get gameBoard() {
     return this.board;
